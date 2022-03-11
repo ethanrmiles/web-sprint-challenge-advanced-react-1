@@ -1,45 +1,33 @@
 import React from 'react'
 import { useState } from 'react'
 
-//const gridArr = [   [[1],[2],[3]], [[4],['B'],[6]], [[7],[8],[9]]   ] 
+const grid =  [[null, null, null], [null, "B", null], [null, null, null]];
 
-const grid = [
-  [1,2,3],
-  [4,5,6],
-  [7,8,9],
-]
-
-
-const showPosition = () => {
-  for(let i = 0; i < grid.length; i++){
-    for(let j = 0; j < grid[i].length; j++){
-      console.log(`at: [${i},${j}], value: ${grid[i][j]}`)
-      }
-  }
-}
-
-showPosition()
-
-const currentPosition = (div) => {
-  for(let i = 0; i < grid.length; i++){
+const getCoordinates = (array) => {
+  //Given a destination, the function returns the coordinates of that location
+  const [location, setLocation]=useState()
+  for(let i = 0; i < array.length; i++){
     
-    for(let j = 0; j < grid[i].length; j++){
-      const location = ` [${i},${j}]`
-      if(grid[i][j] === div) return location 
+    for(let j = 0; j < array[i].length; j++){
+      const location = ` [${i}][${j}]`
+      if(grid[i][j] === 'B') return location 
       }
   }
-}
-
-console.log(currentPosition(8))
-
+  setLocation(location)
+} 
 
 
 
 
-export default function AppFunctional(props) {
-  // const [position, setPosition] = useState(initial)
 
 
+
+
+
+
+export default function AppFunctional(props) {  
+ const [x,y] = getCoordinates(grid)
+ console.log(`${x}${y}`) // (1, 2)
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">

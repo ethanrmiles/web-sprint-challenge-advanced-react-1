@@ -9,11 +9,6 @@ base coordinates: 2,2
 
 
 
-const gridArr = [[0,1,2],[0,1,2],[0,1,2]]
-const initial = gridArr[1][1]
-console.log(initial)
-
-
 
 
 
