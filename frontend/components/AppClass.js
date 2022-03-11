@@ -7,16 +7,14 @@ base coordinates: 2,2
 
 */
 
-function makeMatrix(cols, rows) {
-  const  arr = new Array (cols);
-  for (let i = 0; i < arr.length; i++){
-    arr[i] = new Array(rows)
-  }
-  return arr;
-}
 
-const multiArray = makeMatrix(3,3)
-console.log(multiArray[1][3])
+
+const gridArr = [[0,1,2],[0,1,2],[0,1,2]]
+const initial = gridArr[1][1]
+console.log(initial)
+
+
+
 
 
 
