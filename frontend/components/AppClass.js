@@ -1,4 +1,26 @@
 import React from 'react'
+import { array } from 'yup'
+
+/* 
+what is going on: 
+base coordinates: 2,2
+
+*/
+
+function makeMatrix(cols, rows) {
+  const  arr = new Array (cols);
+  for (let i = 0; i < arr.length; i++){
+    arr[i] = new Array(rows)
+  }
+  return arr;
+}
+
+const multiArray = makeMatrix(3,3)
+console.log(multiArray[1][3])
+
+
+
+
 
 export default class AppClass extends React.Component {
   render() {
