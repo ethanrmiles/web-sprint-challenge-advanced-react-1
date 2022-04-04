@@ -4,7 +4,7 @@ const grid = [
     [7,8,9],
   ]
   
-
+  const grid =  [[null, null, null], [null, "B", null], [null, null, null]];
 const showPositionCoordinates = () => {
     for(let i = 0; i < grid.length; i++){
       for(let j = 0; j < grid[i].length; j++){
