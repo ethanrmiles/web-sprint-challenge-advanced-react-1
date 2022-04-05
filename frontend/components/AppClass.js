@@ -143,7 +143,7 @@ reset = () => {
   this.setState({message: 'Ouch: email is required'})
 }else if(this.state.formValues){
   this.postEmail()
-  this.setState({message: ''})
+  this.setState({message: '', formValues: ''})
 }
 }
 
@@ -186,7 +186,7 @@ componentDidUpdate(prevProps, previousState) {
           <button id="reset"onClick={this.reset}>reset</button>
         </div>
         <form onSubmit={this.submitHandler}>
-          <input id="email" type="email" placeholder="type email" onChange={this.changeHandler} value={this.formValues}></input>
+          <input id="email" type="email" placeholder="type email" onChange={this.changeHandler} value={this.state.formValues}></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
