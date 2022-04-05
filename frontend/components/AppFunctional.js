@@ -135,9 +135,6 @@ useEffect(() => {
   numConverter(position)
 }, [position])
 
-
-
-
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">

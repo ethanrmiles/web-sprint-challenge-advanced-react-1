@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
-// import { array } from 'yup'
+import { array } from 'yup'
 
 
 const initialState = {
@@ -133,7 +133,6 @@ reset = () => {
 }
 
  submitHandler = (evt) => {
-   console.log('submit pressed')
     evt.preventDefault()
   if(this.state.formValues === 'foo@bar.baz'){
     this.setState({message: 'foo@bar.baz failure #71'})
