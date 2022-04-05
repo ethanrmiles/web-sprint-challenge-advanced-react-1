@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import axios from 'axios'
 // import { array } from 'yup'
 
 
@@ -116,7 +117,35 @@ reset = () => {
   })
 }
 
+ postEmail = () => {
+  const x = this.state.coordinates.charAt(0)
+  const y = this.state.coordinates.charAt(2)
+  const steps = this.state.count
+  const email = this.state.formValues
 
+  axios.post('http://localhost:9000/api/result', {x, y, steps, email})
+  .then(res => {
+    this.setState({...this.state, message: res.data.message})
+  })
+  .catch(err => {
+    this.setState({...this.state, message: err.message})
+  })
+}
+
+ submitHandler = (evt) => {
+   console.log('submit pressed')
+    evt.preventDefault()
+  if(this.state.formValues === 'foo@bar.baz'){
+    this.setState({message: 'foo@bar.baz failure #71'})
+}else if(this.state.formValues === 'bad@email'){
+  this.setState({message: 'Ouch: email must be a valid email'})
+}else if(this.state.formValues === ''){
+  this.setState({message: 'Ouch: email is required'})
+}else if(this.state.formValues){
+  this.postEmail()
+  this.setState({message: ''})
+}
+}
 
  changeHandler = (evt) => {
   this.setState({ formValues: evt.target.value})
@@ -156,7 +185,7 @@ componentDidUpdate(prevProps, previousState) {
           <button id="down"onClick={this.down}>DOWN</button>
           <button id="reset"onClick={this.reset}>reset</button>
         </div>
-        <form>
+        <form onSubmit={this.submitHandler}>
           <input id="email" type="email" placeholder="type email" onChange={this.changeHandler} value={this.formValues}></input>
           <input id="submit" type="submit"></input>
         </form>
