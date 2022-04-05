@@ -2,9 +2,13 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 
 
+
 export default function AppFunctional(props) {  
   const [position, setPosition] = useState(4)
   const [message, setMessage] = useState()
+  const [coordinates, setCoordinates] = useState('2,2')
+
+  //ASSIGN YOUR NUMBERS TO COORDINATES
 
 // const left = () =>  position > 0 ? setPosition(position -1) : position
 const left = () => {
@@ -13,6 +17,7 @@ const left = () => {
   } else {
     setMessage(null)
     setPosition(position -1)
+    
   }
 }
 
@@ -22,6 +27,7 @@ const right = () => {
   } else {
     setMessage(null)
     setPosition(position +1)
+   
   }
 }
 
@@ -42,25 +48,65 @@ const down = () => {
     setPosition(position +3)
   }
 }
+
 const reset = () => setPosition(4)
+
+const numConverter = (position) => {
+  switch(position){
+    case 0:
+      setCoordinates('1,1')
+      break;
+      case 1:
+        setCoordinates('2,1')
+        break;
+        case 2:
+      setCoordinates('3,1')
+      break;
+      case 3:
+      setCoordinates('1,2')
+      break;
+      case 4:
+      setCoordinates('2,2')
+      break;
+      case 5:
+      setCoordinates('3,2')
+      break;
+      case 6:
+      setCoordinates('1,3')
+      break;
+      case 7:
+      setCoordinates('2,3')
+      break;
+      case 8:
+      setCoordinates('3,3')
+      break;
+    default: 
+    setCoordinates('2,2')
+  }
+}
+
+useEffect(() => {
+  console.log('position changed!')
+  numConverter(position)
+}, [position])
 
 
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">{`Coordinates ${position}`}</h3>
+        <h3 id="coordinates">{`Coordinates (${coordinates})`}</h3>
         <h3 id="steps">You moved 0 times</h3>
       </div>
       <div id="grid">
-        <div className={`square${position === 0 ? ' active' : ""}`}>{position === 0 ? "B" : 0}</div>
-        <div className={`square${position === 1 ? ' active' : ""}`}>{position === 1 ? "B" : 1}</div>
-        <div className={`square${position === 2 ? ' active' : ""}`}>{position === 2 ? "B" : 2}</div>
-        <div className={`square${position === 3 ? ' active' : ""}`}>{position === 3 ? "B" : 3}</div>
-        <div className={`square${position === 4 ? ' active' : ""}`}>{position === 4 ? "B" : 4}</div>
-        <div className={`square${position === 5 ? ' active' : ""}`}>{position === 5 ? "B" : 5}</div>
-        <div className={`square${position === 6 ? ' active' : ""}`}>{position === 6 ? "B" : 6}</div>
-        <div className={`square${position === 7 ? ' active' : ""}`}>{position === 7 ? "B" : 7}</div>
-        <div className={`square${position === 8 ? ' active' : ""}`}>{position === 8 ? "B" : 8}</div>
+        <div className={`square${position === 0 ? ' active' : ""}`}>{position === 0 ? "B" : null}</div>
+        <div className={`square${position === 1 ? ' active' : ""}`}>{position === 1 ? "B" : null}</div>
+        <div className={`square${position === 2 ? ' active' : ""}`}>{position === 2 ? "B" : null}</div>
+        <div className={`square${position === 3 ? ' active' : ""}`}>{position === 3 ? "B" : null}</div>
+        <div className={`square${position === 4 ? ' active' : ""}`}>{position === 4 ? "B" : null}</div>
+        <div className={`square${position === 5 ? ' active' : ""}`}>{position === 5 ? "B" : null}</div>
+        <div className={`square${position === 6 ? ' active' : ""}`}>{position === 6 ? "B" : null}</div>
+        <div className={`square${position === 7 ? ' active' : ""}`}>{position === 7 ? "B" : null}</div>
+        <div className={`square${position === 8 ? ' active' : ""}`}>{position === 8 ? "B" : null}</div>
       </div>
       <div className="info">
         <h3 id="message">{message}</h3>
