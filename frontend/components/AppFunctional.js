@@ -4,8 +4,9 @@ import axios from 'axios'
 
 
 
+
 export default function AppFunctional(props) {  
-  const [position, setPosition] = useState(4)
+  const [position, setPosition] = useState(5)
   const [message, setMessage] = useState()
   const [coordinates, setCoordinates] = useState('2,2')
   const [count, setCount] = useState(0)
@@ -16,7 +17,7 @@ export default function AppFunctional(props) {
 
 // const left = () =>  position > 0 ? setPosition(position -1) : position
 const left = () => {
-  if(position === 0 || position ===  3 || position ===  6 ){
+  if(position === 1 || position ===  4 || position ===  7 ){
     setMessage("You can't go left")
   } else {
     setMessage(null)
@@ -26,7 +27,7 @@ const left = () => {
 }
 
 const right = () => {
-  if(position === 2 || position ===  5 || position ===  8 ){
+  if(position === 3 || position ===  6 || position ===  9 ){
     setMessage("You can't go right")
   } else {
     setMessage(null)
@@ -36,7 +37,7 @@ const right = () => {
 }
 
 const up = () => {
-  if(position === 0 || position ===  1 || position ===  2 ){
+  if(position === 1 || position ===  2 || position ===  3 ){
     setMessage("You can't go up")
   } else {
     setMessage(null)
@@ -46,47 +47,50 @@ const up = () => {
 }
 // const down = () => setPosition(position + 3)
 const down = () => {
-  if(position === 6 || position ===  7 || position ===  8 ){
+  if(position === 7 || position ===  8 || position ===  9 ){
     setMessage("You can't go down")
   } else {
-    setMessage(null)
+    setMessage("")
+    setFormValues("")
     setPosition(position +3)
     setCount(count + 1)
   }
 }
 
 const reset = () => {
-  setPosition(4) 
+  setMessage("")
+  setFormValues("")
+  setPosition(5) 
   setCount(0)
 }
 
 const numConverter = (position) => {
   switch(position){
-    case 0:
+    case 1:
       setCoordinates('1,1')
       break;
-      case 1:
+      case 2:
         setCoordinates('2,1')
         break;
-        case 2:
+        case 3:
       setCoordinates('3,1')
       break;
-      case 3:
+      case 4:
       setCoordinates('1,2')
       break;
-      case 4:
+      case 5:
       setCoordinates('2,2')
       break;
-      case 5:
+      case 6:
       setCoordinates('3,2')
       break;
-      case 6:
+      case 7:
       setCoordinates('1,3')
       break;
-      case 7:
+      case 8:
       setCoordinates('2,3')
       break;
-      case 8:
+      case 9:
       setCoordinates('3,3')
       break;
     default: 
@@ -95,7 +99,6 @@ const numConverter = (position) => {
 }
 
 const postEmail = () => {
-  console.log('post email')
   const x = coordinates.charAt(0)
   const y = coordinates.charAt(2)
   const steps = count
@@ -112,8 +115,16 @@ const postEmail = () => {
 
 const submitHandler = (evt) => {
     evt.preventDefault()
+    if(formValues === 'foo@bar.baz'){
+      setMessage('foo@bar.baz failure #71')
+  }else if(formValues === 'bad@email'){
+    setMessage('Ouch: email must be a valid email')
+  }else if(formValues === ''){
+    setMessage('Ouch: email is required')
+  }else if(formValues){
     postEmail()
     setFormValues("")
+  }
 }
 
 const changeHandler = (evt) => {
@@ -125,14 +136,15 @@ useEffect(() => {
 }, [position])
 
 
+
+
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
         <h3 id="coordinates">{`Coordinates (${coordinates})`}</h3>
-        <h3 id="steps">{`You moved ${count} times`}</h3>
+        <h3 id="steps">{ count === 1 ? `You moved ${count} time` : `You moved ${count} times`}</h3>
       </div>
       <div id="grid">
-        <div className={`square${position === 0 ? ' active' : ""}`}>{position === 0 ? "B" : null}</div>
         <div className={`square${position === 1 ? ' active' : ""}`}>{position === 1 ? "B" : null}</div>
         <div className={`square${position === 2 ? ' active' : ""}`}>{position === 2 ? "B" : null}</div>
         <div className={`square${position === 3 ? ' active' : ""}`}>{position === 3 ? "B" : null}</div>
@@ -141,6 +153,7 @@ useEffect(() => {
         <div className={`square${position === 6 ? ' active' : ""}`}>{position === 6 ? "B" : null}</div>
         <div className={`square${position === 7 ? ' active' : ""}`}>{position === 7 ? "B" : null}</div>
         <div className={`square${position === 8 ? ' active' : ""}`}>{position === 8 ? "B" : null}</div>
+        <div className={`square${position === 9 ? ' active' : ""}`}>{position === 9 ? "B" : null}</div>
       </div>
       <div className="info">
         <h3 id="message">{message}</h3>
