@@ -118,7 +118,9 @@ reset = () => {
 
 
 
-
+ changeHandler = (evt) => {
+  this.setState({ formValues: evt.target.value})
+}
 
 componentDidUpdate(prevProps, previousState) {
   if(this.state.position !== previousState.position){
@@ -155,7 +157,7 @@ componentDidUpdate(prevProps, previousState) {
           <button id="reset"onClick={this.reset}>reset</button>
         </div>
         <form>
-          <input id="email" type="email" placeholder="type email"></input>
+          <input id="email" type="email" placeholder="type email" onChange={this.changeHandler} value={this.formValues}></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
