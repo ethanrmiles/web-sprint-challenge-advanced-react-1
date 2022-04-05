@@ -7,6 +7,7 @@ export default function AppFunctional(props) {
   const [position, setPosition] = useState(4)
   const [message, setMessage] = useState()
   const [coordinates, setCoordinates] = useState('2,2')
+  const [count, setCount] = useState(0)
 
   //ASSIGN YOUR NUMBERS TO COORDINATES
 
@@ -17,7 +18,7 @@ const left = () => {
   } else {
     setMessage(null)
     setPosition(position -1)
-    
+    setCount(count + 1)
   }
 }
 
@@ -27,7 +28,7 @@ const right = () => {
   } else {
     setMessage(null)
     setPosition(position +1)
-   
+    setCount(count + 1)
   }
 }
 
@@ -37,6 +38,7 @@ const up = () => {
   } else {
     setMessage(null)
     setPosition(position -3)
+    setCount(count + 1)
   }
 }
 // const down = () => setPosition(position + 3)
@@ -46,10 +48,14 @@ const down = () => {
   } else {
     setMessage(null)
     setPosition(position +3)
+    setCount(count + 1)
   }
 }
 
-const reset = () => setPosition(4)
+const reset = () => {
+  setPosition(4) 
+  setCount(0)
+}
 
 const numConverter = (position) => {
   switch(position){
@@ -86,7 +92,6 @@ const numConverter = (position) => {
 }
 
 useEffect(() => {
-  console.log('position changed!')
   numConverter(position)
 }, [position])
 
@@ -95,7 +100,7 @@ useEffect(() => {
     <div id="wrapper" className={props.className}>
       <div className="info">
         <h3 id="coordinates">{`Coordinates (${coordinates})`}</h3>
-        <h3 id="steps">You moved 0 times</h3>
+        <h3 id="steps">{`You moved ${count} times`}</h3>
       </div>
       <div id="grid">
         <div className={`square${position === 0 ? ' active' : ""}`}>{position === 0 ? "B" : null}</div>
