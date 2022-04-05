@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import axios from 'axios'
 
 
 
@@ -95,11 +96,24 @@ const numConverter = (position) => {
 
 const postEmail = () => {
   console.log('post email')
+  const x = coordinates.charAt(0)
+  const y = coordinates.charAt(2)
+  const steps = count
+  const email = formValues
+
+  axios.post('http://localhost:9000/api/result', {x, y, steps, email})
+  .then(res => {
+    setMessage(res.data.message)
+  })
+  .catch(err => {
+    setMessage(err.message)
+  })
 }
 
 const submitHandler = (evt) => {
     evt.preventDefault()
     postEmail()
+    setFormValues("")
 }
 
 const changeHandler = (evt) => {
@@ -139,7 +153,7 @@ useEffect(() => {
         <button id="reset" onClick={reset}>reset</button>
       </div>
       <form onSubmit={evt => submitHandler(evt)}>
-        <input id="email" type="email" placeholder="type email" onChange={changeHandler}></input>
+        <input id="email" type="email" placeholder="type email" onChange={changeHandler} value={formValues}></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>
