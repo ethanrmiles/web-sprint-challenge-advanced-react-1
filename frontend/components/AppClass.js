@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 // import { array } from 'yup'
 
 
@@ -11,7 +11,40 @@ const initialState = {
 }
 export default class AppClass extends React.Component {
   state = initialState
-  // { position, message, coordinates, count, formValues} = state
+
+  numConverter = (position) => {
+    switch(position){
+      case 1:
+        this.setState({ coordinates: '1,1'})
+        break;
+        case 2:
+          this.setState({ coordinates: '2,1'})
+          break;
+          case 3:
+        this.setState({ coordinates: '3,1'})
+        break;
+        case 4:
+        this.setState({ coordinates: '1,2'})
+        break;
+        case 5:
+        this.setState({ coordinates: '2,2'})
+        break;
+        case 6:
+        this.setState({ coordinates: '3,2'})
+        break;
+        case 7:
+        this.setState({ coordinates: '1,3'})
+        break;
+        case 8:
+        this.setState({ coordinates: '2,3'})
+        break;
+        case 9:
+        this.setState({ coordinates: '3,3'})
+        break;
+      default: 
+      this.setState({ coordinates: '2,2'})
+    }
+  }
   
    left = () => {
      const { position, message, count } = this.state
@@ -70,6 +103,7 @@ down = () => {
      position: position +3,
      count: count + 1
    })
+   this.numConverter(position)
  }
 }
 
@@ -82,13 +116,22 @@ reset = () => {
   })
 }
 
+
+
+
+
+componentDidUpdate(prevProps, previousState) {
+  if(this.state.position !== previousState.position){
+    this.numConverter(this.state.position)
+  }
+}
   render() {
     const { className } = this.props
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">Coordinates (2, 2)</h3>
-          <h3 id="steps">You moved 0 times</h3>
+          <h3 id="coordinates">{`Coordinates (${this.state.coordinates})`}</h3>
+          <h3 id="steps">{ this.state.count === 1 ? `You moved ${this.state.count} time` : `You moved ${this.state.count} times`}</h3>
         </div>
         <div id="grid">
           <div className={`square${this.state.position === 1 ? ' active' : ""}`}>{this.state.position === 1 ? "B" : null}</div>
