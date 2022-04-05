@@ -8,6 +8,8 @@ export default function AppFunctional(props) {
   const [message, setMessage] = useState()
   const [coordinates, setCoordinates] = useState('2,2')
   const [count, setCount] = useState(0)
+  const [formValues, setFormValues] = useState('')
+  
 
   //ASSIGN YOUR NUMBERS TO COORDINATES
 
@@ -91,6 +93,19 @@ const numConverter = (position) => {
   }
 }
 
+const postEmail = () => {
+  console.log('post email')
+}
+
+const submitHandler = (evt) => {
+    evt.preventDefault()
+    postEmail()
+}
+
+const changeHandler = (evt) => {
+  setFormValues(evt.target.value)
+}
+
 useEffect(() => {
   numConverter(position)
 }, [position])
@@ -123,8 +138,8 @@ useEffect(() => {
         <button id="down" onClick={down}>DOWN</button>
         <button id="reset" onClick={reset}>reset</button>
       </div>
-      <form>
-        <input id="email" type="email" placeholder="type email"></input>
+      <form onSubmit={evt => submitHandler(evt)}>
+        <input id="email" type="email" placeholder="type email" onChange={changeHandler}></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>
