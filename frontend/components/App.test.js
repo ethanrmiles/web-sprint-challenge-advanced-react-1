@@ -17,7 +17,7 @@ let squares
 
 
 
-const testSquares = (squares, activeIdx) => {
+const testTheGrid = (squares, activeIdx) => {
   squares?.forEach((square, idx) => {
     if (idx === activeIdx) {
       expect(square.textContent).toBe('B')
@@ -39,19 +39,19 @@ describe('AppFunctional Component', () => {
     expect(grid).toBeVisible()
   })
   test('initially active square should be 4', () => {
-    testSquares(squares, 1)
+    testTheGrid(squares, 1)
   })
   test('nav up', () => {
     fireEvent.click(document.querySelector('#up'))
-    testSquares(squares, 1)
+    testTheGrid(squares, 1)
   })
   test('nav down', () => {
     fireEvent.click(document.querySelector('#down'))
-    testSquares(squares, 7)
+    testTheGrid(squares, 7)
   })
   test('nav right', () => {
     fireEvent.click(document.querySelector('#right'))
-    testSquares(squares, 5)
+    testTheGrid(squares, 5)
   })
 })
 
